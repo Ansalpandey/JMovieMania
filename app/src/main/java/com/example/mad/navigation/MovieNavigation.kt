@@ -15,7 +15,7 @@ fun MovieNavigation(navHostController: NavHostController) {
   ) {
     composable(route = MovieNavigationItem.MovieList.route) { MovieListScreen(navHostController) }
     composable(route = MovieNavigationItem.MovieDetails.route+"/{id}") {
-      val id = it.arguments?.getString("id")
+      it.arguments?.getString("id")
       MovieDetailsScreen() }
   }
 }
