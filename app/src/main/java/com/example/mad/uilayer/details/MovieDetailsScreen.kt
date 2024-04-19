@@ -18,6 +18,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -70,8 +71,25 @@ fun MovieDetailsScreen(viewModel: MovieDetailViewModel = hiltViewModel()) {
         Text(text = "Release Date:- ${it.release_date}")
 
         Spacer(modifier = Modifier.height(12.dp))
-        Column { it.spoken_languages.forEach { spokenLanguage ->
-          Text(text = "Language:- ${spokenLanguage.name}", fontSize = 22.sp) } }
+        Column {
+          it.spoken_languages.forEach { spokenLanguage ->
+            Text(text = "Language:- ${spokenLanguage.name}", fontSize = 22.sp)
+          }
+        }
+
+        Spacer(modifier = Modifier.height(12.dp))
+        val genreNames = it.genres.map { it.name }
+        Text(
+          text = "Genres:- ${genreNames.joinToString()}",
+          maxLines = 2,
+          textAlign = TextAlign.Center,
+          overflow = TextOverflow.Visible,
+        )
+        Spacer(modifier = Modifier.height(12.dp))
+        Text(text = "Revenue:- $${it.revenue}")
+
+        Spacer(modifier = Modifier.height(12.dp))
+        it.belongs_to_collection?.let { it1 -> Text(text = it1.name) }
       }
     }
   }
