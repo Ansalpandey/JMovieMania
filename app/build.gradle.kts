@@ -1,7 +1,7 @@
 plugins {
   alias(libs.plugins.androidApplication)
   alias(libs.plugins.jetbrainsKotlinAndroid)
-  id("kotlin-kapt")
+  kotlin("kapt")
   id("com.google.dagger.hilt.android")
 }
 
@@ -22,7 +22,7 @@ android {
 
   buildTypes {
     release {
-      isMinifyEnabled = false
+      isMinifyEnabled = true
       proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
       signingConfig = signingConfigs.getByName("debug")
     }
@@ -35,6 +35,9 @@ android {
   buildFeatures { compose = true }
   composeOptions { kotlinCompilerExtensionVersion = "1.5.1" }
   packaging { resources { excludes += "/META-INF/{AL2.0,LGPL2.1}" } }
+}
+kapt {
+  correctErrorTypes = true
 }
 
 dependencies {

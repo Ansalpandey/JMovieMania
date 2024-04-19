@@ -1,5 +1,6 @@
 package com.example.mad.uilayer
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,11 +16,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.example.mad.model.Movie
+import com.example.mad.navigation.MovieNavigationItem
 
 @Composable
-fun MovieListScreen(viewModel: MovieViewModel = hiltViewModel()) {
+fun MovieListScreen(
+  navHostController: NavHostController,
+  viewModel: MovieViewModel = hiltViewModel(),
+) {
   val result = viewModel.movieList.value
 
   if (result.isLoading) {
@@ -32,15 +38,26 @@ fun MovieListScreen(viewModel: MovieViewModel = hiltViewModel()) {
       Text(text = result.error)
     }
   }
-  result.data?.let { LazyColumn { items(result.data) { MovieItem(it) } } }
+  result.data?.let {
+    LazyColumn {
+      items(result.data) {
+        MovieItem(it) {
+          navHostController.navigate(MovieNavigationItem.MovieDetails.route + "/$it")
+        }
+      }
+    }
+  }
 }
 
 @Composable
-fun MovieItem(it: Movie) {
+fun MovieItem(it: Movie, onClick: (String) -> Unit) {
   AsyncImage(
     model = "https://image.tmdb.org/t/p/w500/${it.poster_path}",
     contentDescription = "movie_poster",
-    modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp).height(220.dp),
-    contentScale = ContentScale.FillWidth,
+    modifier =
+      Modifier.fillMaxWidth().padding(vertical = 4.dp).height(600.dp).clickable {
+        onClick.invoke(it.id.toString())
+      },
+    contentScale = ContentScale.Crop,
   )
 }
