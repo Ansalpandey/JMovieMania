@@ -3,8 +3,9 @@ package com.example.mad.datalayer
 import com.example.mad.common.Resource
 import com.example.mad.model.Movie
 import com.example.mad.model.details.MovieDetails
+import javax.inject.Inject
 
-class MovieRepository(private val movieDataSource: MovieDataSource) {
+class MovieRepository @Inject constructor(private val movieDataSource: MovieDataSource) {
 
   suspend fun getMovieList(): Resource<List<Movie>> {
     return try {
