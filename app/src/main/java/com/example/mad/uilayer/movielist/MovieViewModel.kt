@@ -1,4 +1,4 @@
-package com.example.mad.uilayer
+package com.example.mad.uilayer.movielist
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel

@@ -1,4 +1,4 @@
-package com.example.mad.uilayer
+package com.example.mad.uilayer.movielist
 
 import com.example.mad.model.Movie
 

@@ -5,7 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.mad.uilayer.details.MovieDetailsScreen
-import com.example.mad.uilayer.MovieListScreen
+import com.example.mad.uilayer.movielist.MovieListScreen
 
 @Composable
 fun MovieNavigation(navHostController: NavHostController) {
